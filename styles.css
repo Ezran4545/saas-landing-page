@@ -1,3 +1,10 @@
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+      
+
+
 /* 1. Global Reset + Base */
 * {
     margin: 0;
@@ -46,12 +53,28 @@ nav a {
     color: #2d3436;
     font-weight: 500;
     transition: color 0.3s ease;
+    position: relative;
 }
 
 nav a:hover {
     color: #0984e3;
 }
 
+/* Optional underline effect */
+nav a::after {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    background: #0984e3;
+    left: 0;
+    bottom: -5px;
+    transition: 0.3s;
+}
+
+nav a:hover::after {
+    width: 100%;
+}
 /* Nav Button */
 .nav-btn {
     background-color: #0984e3;
@@ -70,10 +93,61 @@ nav a:hover {
 }
 
 /* 3. Hero Section */
+/* HERO POSITIONING */
 .hero {
     text-align: center;
     padding: 120px 10%;
-    background: linear-gradient(to right, #f4f7ff, #eef3ff);
+    position: relative;
+    overflow: hidden;
+}
+
+/* GRAPH BACKGROUND */
+.graph-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.graph-bg svg {
+    width: 100%;
+    height: 100%;
+}
+
+/* GRAPH LINES */
+.line {
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    opacity: 0.4;
+}
+
+.line1 {
+    stroke: #0984e3;
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: drawLine 6s linear infinite;
+}
+
+.line2 {
+    stroke: #6c5ce7;
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: drawLine 8s linear infinite;
+}
+
+/* ANIMATION */
+@keyframes drawLine {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+/* KEEP CONTENT ABOVE */
+.hero-content {
+    position: relative;
+    z-index: 2;
 }
 
 .hero h1 {
@@ -125,5 +199,272 @@ nav a:hover {
 
     .hero {
         padding: 80px 5%;
+    }
+}
+
+/* FEATURES SECTION */
+.features {
+    padding: 80px 10%;
+    text-align: center;
+    background: linear-gradient(to right, #f0f7ff, #e6f0ff);
+}
+
+.features h2 {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+}
+
+.feature-container {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.feature-card {
+    background: #c0f8f1;
+    padding: 30px;
+    width: 280px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-8px);
+}
+
+.feature-card img {
+    margin-bottom: 20px;
+}
+
+.feature-card h3 {
+    margin-bottom: 10px;
+}
+
+
+/* PRICING SECTION */
+.pricing {
+    padding: 100px 10%;
+    text-align: center;
+    background: #ffffff;
+}
+
+.pricing h2 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.pricing-subtext {
+    color: #636e72;
+    margin-bottom: 50px;
+}
+
+/* CONTAINER */
+.pricing-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+/* CARD */
+.pricing-card {
+    background: #f9fbff;
+    padding: 40px 30px;
+    width: 280px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+}
+
+.pricing-card:hover {
+    transform: translateY(-10px);
+}
+
+/* POPULAR PLAN */
+.popular {
+    background: linear-gradient(135deg, #0984e3, #6c5ce7);
+    color: white;
+    transform: scale(1.05);
+}
+
+.popular button {
+    background: white;
+    color: #0984e3;
+}
+
+/* PRICE */
+.price {
+    font-size: 2.5rem;
+    margin: 20px 0;
+    font-weight: bold;
+}
+
+.price span {
+    font-size: 1rem;
+    color: #1a1b1b;
+}
+
+/* LIST */
+.pricing-card ul {
+    list-style: none;
+    margin: 20px 0;
+}
+
+.pricing-card ul li {
+    margin: 10px 0;
+}
+
+/* BUTTON */
+.pricing-card button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 25px;
+    background: #0984e3;
+    color: white;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.pricing-card button:hover {
+    background: #74b9ff;
+}
+/* CONTACT SECTION */
+.contact {
+   padding: 80px 10%;
+    text-align: center;
+    background: linear-gradient(to right, #eef5ff, #f5f8ff);
+    border-top: 1px solid #e0e6f0; 
+}
+
+.contact h2 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.contact p {
+    margin-bottom: 30px;
+    color: #636e72;
+}
+
+form {
+    max-width: 500px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+form input,
+form textarea {
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #dfe6e9;
+    font-size: 1rem;
+}
+
+form button {
+    background: #0984e3;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+form button:hover {
+    background: #74b9ff;
+}
+/* FOOTER */footer {    text-align: center;    padding: 20px;    background: #2d3436;    color: white;}
+
+/* =========================
+   MOBILE RESPONSIVENESS
+========================= */
+@media (max-width: 768px) {
+
+    /* NAVIGATION */
+    nav {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        padding: 15px 5%;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .nav-btn {
+        width: 100%;
+    }
+
+    /* HERO */
+    .hero {
+        padding: 80px 5%;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+        line-height: 1.3;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    .cta-btn {
+        width: 100%;
+        padding: 14px;
+    }
+
+    /* FEATURES */
+    .feature-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .feature-card {
+        width: 100%;
+        max-width: 320px;
+    }
+
+    /* PRICING */
+    .pricing-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .pricing-card {
+        width: 100%;
+        max-width: 320px;
+    }
+
+    .popular {
+        transform: scale(1); /* prevent overflow */
+    }
+
+    /* CONTACT */
+    form {
+        width: 100%;
+        padding: 20px;
+    }
+
+    form input,
+    form textarea {
+        font-size: 1rem;
+    }
+
+    /* FOOTER */
+    footer {
+        font-size: 0.9rem;
+        padding: 15px;
     }
 }
